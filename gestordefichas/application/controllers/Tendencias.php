@@ -76,15 +76,5 @@ class tendencias extends CI_Controller{
         }
             echo json_encode($retorno);
     }
-
-   /* public function apagarTendencias(){
-        $json = file_get_contents('php://input');
-        $resultado = json_decode($json);
-        $lista = array('idTend'    => '0'
-                       'tendencia' => '0');
-    
-        if(verificarParam($resultado, $lista) == 1){
-            $this->setIdTend($resultado->idTend);
-            $this->setTendencia($resultado->tendencia);*/
 }
 
