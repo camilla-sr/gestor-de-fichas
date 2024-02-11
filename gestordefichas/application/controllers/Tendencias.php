@@ -33,7 +33,7 @@ class tendencias extends CI_Controller{
         if(verificarParam($resultado, $lista) == 1){
             $this->setTendencia($resultado->tendencia);
 
-            if($strlen($this->getTend()) == 0){
+            if(strlen($this->getTend()) == 0){
                 $retorno = array('codigo' => 08,
                                  'msg'    => 'Tendência não informada');
             }elseif(is_numeric($this->getTend()) == True){
@@ -53,7 +53,7 @@ class tendencias extends CI_Controller{
     public function atualizarTendencias(){
         $json = file_get_contents('php://input');
         $resultado = json_decode($json);
-        $lista = array('idTend'    => '0'
+        $lista = array('idTend'    => '0',
                        'tendencia' => '0');
     
         if(verificarParam($resultado, $lista) == 1){
