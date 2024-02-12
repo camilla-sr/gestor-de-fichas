@@ -5,22 +5,19 @@ class tendencias extends CI_Controller{
     private $json;
     private $resultado;
     
-    private $idTend;            
-    private $tendencia;         
+    private $idTend;
+    private $tendencia;
 
     //Getters e Setters
     public function getIdTend(){
         return $this->idTend;
     }
-
     public function setIdTend($idTendFront){
         $this->idTend = $idTendFront;
     }
-
     public function getTendencia(){
         return $this->tendencia;
     }
-
     public function setTendencia($tendenciaFront){
         $this->tendencia = $tendenciaFront;    
     }
@@ -33,11 +30,11 @@ class tendencias extends CI_Controller{
         if(verificarParam($resultado, $lista) == 1){
             $this->setTendencia($resultado->tendencia);
 
-            if(strlen($this->getTend()) == 0){
-                $retorno = array('codigo' => 08,
+            if(strlen($this->getTendencia()) == 0){
+                $retorno = array('codigo' => 8,
                                  'msg'    => 'Tendência não informada');
             }elseif(is_numeric($this->getTend()) == True){
-                $retorno = array('codigo' => 09,
+                $retorno = array('codigo' => 9,
                                  'msg'    => 'Nome da tendência não condiz com o permitido');
             }else{
                 $this->load->model('M_tendencias');
@@ -53,7 +50,7 @@ class tendencias extends CI_Controller{
     public function atualizarTendencias(){
         $json = file_get_contents('php://input');
         $resultado = json_decode($json);
-        $lista = array('idTend'    => '0'
+        $lista = array('idTend'    => '0',
                        'tendencia' => '0');
     
         if(verificarParam($resultado, $lista) == 1){
@@ -86,7 +83,7 @@ class tendencias extends CI_Controller{
     public function apagarTendencias(){
         $json = file_get_contents('php://input');
         $resultado = json_decode($json);
-        $lista = ('idTend' => '0');
+        $lista = array('idTend' => '0');
 
         if(verificarParam($resultado, $lista) == 1){
             $this->setIdTend($resultado->idTend);

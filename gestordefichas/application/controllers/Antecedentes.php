@@ -6,21 +6,18 @@ class antecedentes extends CI_Controller{
     private $resultado;
 
     private $idAntec;
-    private $nome;
+    private $antecedente;
 
     //Getters e setters
     public function getIdAntec(){
         return $this->getIdAntec;
     }
-
     public function setIdAntec($idAntecFront){
         $this->idAntec = $idAntecFront;
     }
-
     public function getNome(){
         return $this->getNome;
     }
-
     public function setNome($nomeFront){
         $this->nome = $nomeFront;
     }
