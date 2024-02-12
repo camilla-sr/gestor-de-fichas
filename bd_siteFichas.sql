@@ -5,7 +5,7 @@ use arquivoFichas;
 create table RACAS(
 	id_raca				int unsigned auto_increment,
     raca				varchar(50) not null unique,		# incluindo sub-raças
-    deslocamento		decimal(4,2) not null,				# em Metros
+    deslocamento		decimal(4,1) not null,				# em Metros
     primary key(id_raca)
 );
 
@@ -17,13 +17,13 @@ create table TENDENCIAS(
 
 create table ANTECEDENTES(
 	id_antec			int unsigned auto_increment,
-    nome				varchar(30) not null unique,
+    antecedente			varchar(30) not null unique,
     primary key(id_antec)
 );
 
 create table TALENTOS(
 	id_talento			int unsigned auto_increment,
-    nome				varchar(50) not null unique,
+    talento				varchar(50) not null unique,
     descricao			text not null,
     requisito			varchar(30) default 'Não necessário',
     primary key(id_talento)
