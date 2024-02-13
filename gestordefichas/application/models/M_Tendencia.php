@@ -21,6 +21,28 @@ class M_Tendencia extends CI_model{
         return $dados;
     }
 
+    public function consultarTendencia($idTend, $tendencia){
+        if($idTend == "" and $tendencia == ""){
+            $sql = "select * from TENDENCIAS";
+        }elseif($idTend != "" and $tendencia == ""){
+            $sql = "select * from TENDENCIAS where id_tend = $idTend";
+        }elseif($idTend == "" and $tendencia != ""){
+            $sql = "select * from TENDENCIAS where tendencia like '%$tendencia%'";
+        }else{
+            $sql = "select * from TENDENCIAS where tendencia like '%$tendencia%' and id_tend = $idTend";
+        }
+        $retorno = $this->db->query($sql);
+        if($retorno->num_rows() > 0){
+            $dados = array('codigo' => 88,
+                            'dados' => $retorno->result());
+        }else{
+            $dados = array('codigo' => 11,
+                            'msg' => 'Nenhum dado encontrado');
+        }
+
+        return $dados;
+    }
+
     public function alterarTendencia($idTend, $tendencia){
         $retornoID = $this->validarTendencia($idTend);
         if($retornoID['codigo'] == 1){

@@ -47,6 +47,33 @@ class Antecedente extends CI_Controller{
             echo json_encode($retorno);
     }
 
+    public function consultarAntecedente(){
+        $json = file_get_contents('php://input');
+        $resultado = json_decode($json);
+        $lista = array('idAntec'        => '0',
+                       'antecedente'    => '0');
+   
+        if(verificarParam($resultado, $lista) == 1){
+            $this->setIdAntec($resultado->idAntec);
+            $this->getAntecedente($resultado->antecedente);
+
+            if(is_numeric($this->getIdAntec()) == False && $this->getIdAntec() != ""){
+                $retorno = array('codigo' => 21,
+                                'msg' => 'Antecedente não condiz com o permitido');
+            }elseif(is_numeric($this->getAntecedente()) == True && $this->getAntecedente() != ""){
+                $retorno = array('codigo' => 21,
+                                'msg' => 'Antecedente não condiz com o permitido');
+            }else{
+                $this->load->model('M_Antecedente');
+                $retorno = $this->M_Antecedente->consultarAntecedente($this->getIdAntec(), $this->getAntecedente());
+            }
+        }else{
+            $retorno = array('codigo' => 999,
+                            'msg' => 'Campos do front diferente dos requisitados.');
+        }
+        echo json_encode($retorno);
+    }
+
     public function alterarAntecedente(){
         $json = file_get_contents('php://input');
         $resultado = json_decode($json);

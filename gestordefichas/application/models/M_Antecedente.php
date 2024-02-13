@@ -21,6 +21,27 @@ class M_Antecedente extends CI_model{
         return $dados;
     }
 
+    public function consultarAntecedente($idAntec, $antecedente){
+        if($idAntec == "" and $antecedente == ""){
+            $sql = "select * from ANTECEDENTES";
+        }elseif($idAntec != "" and $antecedente == ""){
+            $sql = "select * from ANTECEDENTES where id_antec = $idAntec";
+        }elseif($idAntec == "" and $antecedente != ""){
+            $sql = "select * from ANTECEDENTES where antecedente like '%$antecedente%'";
+        }elseif($idAntec != "" and $antecedente != ""){
+            $sql = "select * from ANTECEDENTES where antecedente like '%$antecedente%' and id_antec = $idAntec";
+        }
+        $retorno = $this->db->query($sql);
+        if($retorno->num_rows() > 0){
+            $dados = array('codigo' => 88,
+                            'dados' => $retorno->result());
+        }else{
+            $dados = array('codigo' => 11,
+                            'msg' => 'Nenhum dado encontrado');
+        }
+        return $dados;
+    }
+
     public function alterarAntecedente($idAntec, $antecedente){
         $retornoID = $this->validarAntecedente($idAntec);
         if($retornoID['codigo'] == 2){

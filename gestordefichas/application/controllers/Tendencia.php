@@ -42,9 +42,35 @@ class Tendencia extends CI_Controller{
             }
         }else{
             $retorno = array('codigo' => 999,
-                             'msg'    => 'Campos do front não condizem com o permitido');
+                             'msg'    => 'Campos do front diferentes dos requisitados.');
         }
             echo json_encode($retorno);
+    }
+
+    public function consultarTendencia(){
+        $json = file_get_contents('php://input');
+        $resultado = json_decode($json);
+        $lista = array('idTend'     => '0',
+                       'tendencia'  => '0');
+        if(verificarParam($resultado,$lista) == 1){
+            $this->setIdTend($resultado->idTend);
+            $this->setTendencia($resultado->tendencia);
+            
+            if(is_numeric($this->getIdTend()) == False && $this->getIdTend() != ""){
+                $retorno = array('codigo' => 17,
+                                'msg' => 'Tendencia não condiz com o permitido');
+            }elseif(is_numeric($this->getTendencia()) == True && $this->getTendencia() != ""){
+                $retorno = array('codigo' => 17,
+                                'msg' => 'Tendência não condiz com o permitido');
+            }else{
+                $this->load->model('M_Tendencia');
+                $retorno = $this->M_Tendencia->consultarTendencia($this->getIdTend(), $this->getTendencia());
+            }
+        }else{
+            $retorno = array('codigo' => 999,
+                            'msg' => 'Campos do front diferentes dos requisitados.');
+        }
+        echo json_encode($retorno);
     }
 
     public function alterarTendencia(){
@@ -75,7 +101,7 @@ class Tendencia extends CI_Controller{
             }
         }else{
             $retorno = array('codigo' => 999,
-                             'msg'    => 'Campos do front não condizem com o permitido');
+                             'msg'    => 'Campos do front diferentes dos requisitados.');
         }
             echo json_encode($retorno);
     }
@@ -100,7 +126,7 @@ class Tendencia extends CI_Controller{
             }
         }else{
             $retorno = array('codigo' => 999,
-                           'msg'    => 'Campos do front não condizem com o permitido');
+                           'msg'    => 'Campos do front diferentes dos requisitados.');
        }
        echo json_encode($retorno);
     }
