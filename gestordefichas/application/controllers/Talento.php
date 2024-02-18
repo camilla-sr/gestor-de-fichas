@@ -93,5 +93,67 @@ class Talento extends CI_Controller{
         }
         echo json_encode($retorno);
     }
+
+    public function alterarTalento(){
+        $json = file_get_contents('php://input');
+        $resultado = json_decode($json);
+        $lista = array('idTalento'  => '0',
+                       'talento'    => '0',
+                       'descricao'  => '0',
+                       'requisito'  => '0');
+
+        if(verificarParam($resultado, $lista) == 1){
+            $this->setIdTalento($resultado->idTalento);
+            $this->setTalento($resultado->talento);
+            $this->setDescricao($resultado->descricao);
+            $this->setRequisito($resultado->requisito);
+
+            if($this->getIdTalento() == "" && $this->getTalento() == "" && $this->getDescricao() == "" && $this->getRequisito() == ""){
+            $retorno = array('codigo' => 14,
+                            'msg' => 'Nenhum dado selecionado');
+            }elseif($this->getIdTalento() == ""){
+                $retorno = array('codigo' => 24,
+                                'msg' => 'Talento não informado');
+            }elseif(is_numeric($this->getIdTalento()) == False){
+                $retorno = array('codigo' => 26,
+                                'msg' => 'Talento não condiz com o permitido');
+            }elseif($this->getIdTalento() != "" && $this->getTalento() == "" && $this->getDescricao() == "" && $this->getRequisito() == ""){
+                $retorno = array('codigo' => 28,
+                                'msg' => 'Nenhum dado para informação alterado');
+            }else{
+                $this->load->model('M_Talento');
+                $retorno = $this->M_Talento->alterarTalento($this->getIdTalento(), $this->getTalento(),
+                                                            $this->getDescricao(), $this->getRequisito());
+            }
+        }else{
+            $retorno = array('codigo' => 999,
+                            'msg' => 'Campos do front diferentes dos requisistados.');
+        }
+        echo json_encode($retorno);
+    }
+
+    public function apagarTalento(){
+        $json = file_get_contents('php://input');
+        $resultado = json_decode($json);
+        $lista = array('idTalento'      => '0');
+        if(verificarParam($resultado, $lista) == 1){
+            $this->setIdTalento($resultado->idTalento);
+
+            if($this->getIdTalento() == ""){
+                $retorno = array('codigo' => 14,
+                                'msg' => 'Nenhum dado selecionado');
+            }elseif(is_numeric($this->getIdTalento()) == False){
+                $retorno = array('codigo' => 8,
+                                'msg' => 'ID não condiz com o permitido');
+            }else{
+                $this->load->model('M_Talento');
+                $retorno = $this->M_Talento->apagarTalento($this->getIdTalento());
+            }
+        }else{
+            $retorno = array('codigo' => 999,
+                            'msg' => 'Campos do front diferentes dos requisistados');
+        }
+        echo json_encode($retorno);
+    }
 }
 ?>
