@@ -30,7 +30,7 @@ create table TALENTOS(
 );
 
 create table DADOS(
-	id_dice				int unsigned auto_increment,
+	id_dado				int unsigned auto_increment,
     descricao			varchar(3),
     primary key(id_dice)
 );
@@ -40,6 +40,7 @@ create table T_DANO(
     descricao			varchar(30) unique,
     primary key(id_dano)
 );
+
 
 create table ARMADURAS(
 	id_armor			int unsigned auto_increment,
