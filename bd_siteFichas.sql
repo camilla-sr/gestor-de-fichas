@@ -32,7 +32,7 @@ create table TALENTOS(
 create table DADOS(
 	id_dado				int unsigned auto_increment,
     descricao			varchar(3),
-    primary key(id_dice)
+    primary key(id_dado)
 );
 
 create table T_DANO(
@@ -103,7 +103,7 @@ create table CLASSES(
     p_armas_armad		varchar(200) not null,
     pt_Resistencia		varchar(30) not null,		#Proficiência em Teste de Resistência
     primary key(id_classe),
-    constraint foreign key (Dvida) references DADOS(id_dice)
+    constraint foreign key (Dvida) references DADOS(id_dado)
 );
 
 create table HABILIDADES_C(
@@ -202,12 +202,12 @@ create table ARMAS(
     preco				int(2) not null,
     moeda				char(2) not null,
 	quantidade_dado		int(2) default 1,
-    i_diceDano			int unsigned not null,
+    i_dadoDano			int unsigned not null,
 	i_dano				int unsigned not null,
     peso				decimal(4,2) not null,
     propriedades		varchar(65) default '----',
     primary key(id_weapon),
-    constraint foreign key (i_diceDano) references DADOS(id_dice),
+    constraint foreign key (i_dadoDano) references DADOS(id_dado),
     constraint foreign key (i_dano) references T_DANO(id_dano)
 );
 
