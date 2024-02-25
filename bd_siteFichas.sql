@@ -41,36 +41,11 @@ create table TIPO_DANO(
     primary key(id_dano)
 );
 
-create table ARMADURAS(
-	id_armor			int unsigned auto_increment,
-    tipo				varchar(30) not null unique,
-    preco				int(4) not null,
-    moeda				char(2) not null,
-    ca					int(2) not null,				#Somado com valor do modificador abaixo	|	CÁLCULO FEITO
-    modificador			varchar(35) default '----',		#Incrementa no valor de cima			|	MANUALMENTE
-    requisito			varchar(8) default '----',
-    desvantagem			varchar(11) default '----',
-    peso				decimal(4,2) default 0.0,		# Botão para adicionar armadura personalizada
-    primary key(id_armor)
-);
-
-create table EQUIPAMENTOS(
-	id_item				int unsigned auto_increment,
-    item				varchar(50) not null unique,
-    preco				int(3) not null,
-    moeda				char(2) not null,
-    peso				decimal(4,2) not null,
-    primary key(id_item)
-);
-
-create table FERRAMENTAS(
-	id_ferram			int unsigned auto_increment,
-    ferramenta			varchar(55) not null,
-    descricao			varchar(150) default '',
-    preco				int(2) not null,
-    moeda				char(2) not null,
-    peso				decimal(4,2) not null,
-    primary key(id_ferram)
+create table MONEY(
+	id_moeda	int unsigned auto_increment,
+	moeda		char(2) not null,
+    peso		decimal(2,2) default 0.0,
+    primary key(id_moeda)
 );
 
 create table BUGIGANGAS(
@@ -93,6 +68,41 @@ create table HAB_MAGIA(
 );
 
 # TABELAS COM FK
+create table ARMADURAS(
+	id_armor			int unsigned auto_increment,
+    tipo				varchar(30) not null unique,
+    preco				int(4) not null,
+    i_moeda				int not null,
+    ca					int(2) not null,				#Somado com valor do modificador abaixo	|	CÁLCULO FEITO
+    modificador			varchar(35) default '',			#Incrementa no valor de cima			|	MANUALMENTE
+    requisito			varchar(8) default '',
+    desvantagem			varchar(11) default '',
+    peso				decimal(4,2) default 0.0,		# Botão para adicionar armadura personalizada
+    primary key(id_armor),
+    constraint foreign key (i_moeda) references MONEY(id_moeda)
+);
+
+create table EQUIPAMENTOS(
+	id_item				int unsigned auto_increment,
+    item				varchar(50) not null unique,
+    preco				int(3) not null,
+    i_moeda				int not null,
+    peso				decimal(4,2) not null,
+    primary key(id_item),
+    constraint foreign key (i_moeda) references MONEY(id_moeda)
+);
+
+create table FERRAMENTAS(
+	id_ferram			int unsigned auto_increment,
+    ferramenta			varchar(55) not null,
+    descricao			varchar(150) default '',
+    preco				int(2) not null,
+    i_moeda				int not null,
+    peso				decimal(4,2) not null,
+    primary key(id_ferram),
+    constraint foreign key (i_moeda) references MONEY(id_moeda)
+);
+
 create table CLASSES(
 	id_classe			int unsigned auto_increment,
 	classe				varchar(30) not null unique,
