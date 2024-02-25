@@ -31,16 +31,15 @@ create table TALENTOS(
 
 create table DADOS(
 	id_dado				int unsigned auto_increment,
-    descricao			varchar(3),
+    tipo				varchar(3),
     primary key(id_dado)
 );
 
-create table T_DANO(
+create table TIPO_DANO(
 	id_dano				int unsigned auto_increment,
     descricao			varchar(30) unique,
     primary key(id_dano)
 );
-
 
 create table ARMADURAS(
 	id_armor			int unsigned auto_increment,
@@ -208,7 +207,7 @@ create table ARMAS(
     propriedades		varchar(65) default '----',
     primary key(id_weapon),
     constraint foreign key (i_dadoDano) references DADOS(id_dado),
-    constraint foreign key (i_dano) references T_DANO(id_dano)
+    constraint foreign key (i_dano) references TIPO_DANO(id_dano)
 );
 
 create table ARSENAL(				# Armazena apenas armas
