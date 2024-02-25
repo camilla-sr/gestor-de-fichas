@@ -60,8 +60,11 @@ CÓDIGOS DE ERRO POSSÍVEIS
     ****TIPO DE DANO****
     INSERIR DANO
 33          -> TIPO DE DANO JÁ CADASTRADO (MODEL)
-34          -> 
-35          -> 
+
+    ****BUGIGANGAS*****
+    INSERIR BUGIGANGA
+34          -> BUGIGANGA JÁ CADASTRADA (MODEL)
+35          -> BUGIGANGA VÁLIDA (MODEL)
 36          -> 
 37          -> 
 38          -> 
