@@ -72,7 +72,7 @@ create table ARMADURAS(
 	id_armor			int unsigned auto_increment,
     tipo				varchar(30) not null unique,
     preco				int(4) not null,
-    i_moeda				int not null,
+    i_moeda				int unsigned not null,
     ca					int(2) not null,				#Somado com valor do modificador abaixo	|	CÁLCULO FEITO
     modificador			varchar(35) default '',			#Incrementa no valor de cima			|	MANUALMENTE
     requisito			varchar(8) default '',
@@ -86,7 +86,7 @@ create table EQUIPAMENTOS(
 	id_item				int unsigned auto_increment,
     item				varchar(50) not null unique,
     preco				int(3) not null,
-    i_moeda				int not null,
+    i_moeda				int unsigned not null,
     peso				decimal(4,2) not null,
     primary key(id_item),
     constraint foreign key (i_moeda) references MONEY(id_moeda)
@@ -97,7 +97,7 @@ create table FERRAMENTAS(
     ferramenta			varchar(55) not null,
     descricao			varchar(150) default '',
     preco				int(2) not null,
-    i_moeda				int not null,
+    i_moeda				int unsigned not null,
     peso				decimal(4,2) not null,
     primary key(id_ferram),
     constraint foreign key (i_moeda) references MONEY(id_moeda)
