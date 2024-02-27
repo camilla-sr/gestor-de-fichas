@@ -64,9 +64,25 @@ class Bugiganga extends CI_Controller{
             }
         }else{
             $retorno = array('codigo' => 999,
-                            'msg' => "Campos do front diferente dos requisitados");
+                            'msg' => 'Campos do front diferente dos requisitados');
         }
         echo json_encode($retorno);
     }
+
+	public function alterarBugiganga(){
+		$json = file_get_contents('php://input');
+        $resultado = json_decode($json);
+        $lista = array('idBugig'        => '0',
+                        'descricao'     => '0');
+		if(verificarParam($resultado, $lista) == 1){
+			$this->setIdBugiganga($resultado->idBugig);
+            $this->setDescricao($resultado->descricao);
+
+			
+		}else{
+			$retorno = array('codigo' => 999,
+							'msg' => 'Campos do front diferente dos requisitados');
+	}
+		echo json_encode($retorno);
 }
 ?>
