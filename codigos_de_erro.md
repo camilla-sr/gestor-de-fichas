@@ -65,7 +65,9 @@ CÓDIGOS DE ERRO POSSÍVEIS
     INSERIR BUGIGANGA
 34          -> BUGIGANGA JÁ CADASTRADA (MODEL)
 35          -> BUGIGANGA VÁLIDA (MODEL)
-36          -> 
+
+    ALTERAR BUGIGANGA
+36          -> BUGIGANGA NÃO INFORMADA (CONTROLLER)
 37          -> 
 38          -> 
 39          -> 

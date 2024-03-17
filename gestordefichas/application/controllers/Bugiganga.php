@@ -78,11 +78,24 @@ class Bugiganga extends CI_Controller{
 			$this->setIdBugiganga($resultado->idBugig);
             $this->setDescricao($resultado->descricao);
 
-			
+            if($this->getIdBugiganga() == ""){
+                $retorno = array('codigo' => 36,
+                                'msg' => 'Bugiganga não informada');
+            }elseif(is_numeric($this->getIdBugiganga()) == False){
+                $retorno = array('codigo' => 8,
+                                'msg' => 'ID não condiz com o permitido');
+            }elseif(strlen($this->getDescricao()) == 0){
+                $retorno = array('codigo' => 28,
+                                'msg' => 'Nenhum dado para alteração informado');
+            }else{
+                $this->load->model('M_Bugiganga');
+                $retorno = $this->M_Buginganga->alterarBugiganga($this->getIdBugiganga(), $this->getDescricao());
+            }
 		}else{
 			$retorno = array('codigo' => 999,
 							'msg' => 'Campos do front diferente dos requisitados');
-	}
+	    }
 		echo json_encode($retorno);
+    }
 }
 ?>

@@ -42,6 +42,31 @@ class M_Bugiganga extends CI_Model{
         return $dados;
     }
 
+    public function alterarBugiganga($idBugig, $descricao){
+        $retornoID = $this->validarBugiganga($idBugig);
+        if($retornoID['codigo'] == 1){
+            $dados = array('codigo' => 34,
+                            'msg' => 'Bugiganga já cadastrada');
+        }else{
+            $retornoDesc = $this->conferirBugiganga($descricao);
+            if($retornoDesc['codigo'] == 1){
+                $dados = array('codigo' => 34,
+                                'msg' => $retornoDesc['msg']);
+            }else{
+                $sql = "update BUGIGANGAS set descricao = '$descricao' where id_bugig = $idBugig";
+                $this->db->query($sql);
+                if($this->db->affected_rows() > 0){
+                    $dados = array('codigo' => 12,
+                                    'msg' => 'Dados alterados');
+                }else{
+                    $dados = array('codigo' => 6,
+                                    'msg' => 'Houve um problema ao efetuar função');
+                }
+            }
+        }
+        return $dados;
+    }
+
     #   MÉTODOS DE APOIO
     private function conferirBugiganga($descricao){
         $sql = "select * from BUGIGANGAS where descricao like '%$descricao%'";
